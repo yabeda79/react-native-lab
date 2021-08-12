@@ -1,96 +1,41 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import {
-	Colors,
-	DebugInstructions,
-	Header,
-	LearnMoreLinks,
-	ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { ThemeProvider } from 'react-native-elements';
+import appTheme from './theme';
 
-const Section: React.FC<{
-	title: string;
-}> = ({ children, title }) => {
-	const isDarkMode = useColorScheme() === 'dark';
-	return (
-		<View style={styles.sectionContainer}>
-			<Text
-				style={[
-					styles.sectionTitle,
-					{
-						color: isDarkMode ? Colors.white : Colors.black,
-					},
-					styles.sectionFontTest,
-				]}>
-				{title}
-			</Text>
-			<Text
-				style={[
-					styles.sectionDescription,
-					{
-						color: isDarkMode ? Colors.light : Colors.dark,
-					},
-				]}>
-				{children}
-			</Text>
-		</View>
-	);
-};
+import Accounts from './screens/accounts';
+import Cards from './screens/cards';
+import Cheking from './screens/cheking';
+import Giving from './screens/giving';
+import Home from './screens/home';
+import Payments from './screens/payments';
+import Saving from './screens/saving';
+import SignIn from './screens/signin';
+import TabBar from './screens/tabbar';
+import Header from './components/header';
+
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
-	const isDarkMode = useColorScheme() === 'dark';
-
-	const backgroundStyle = {
-		backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-	};
-
 	return (
-		<SafeAreaView style={backgroundStyle}>
-			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-			<ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-				<Header />
-				<View
-					style={{
-						backgroundColor: isDarkMode ? Colors.black : Colors.white,
-					}}>
-					<Section title="Step One">
-						Edit <Text style={styles.highlight}>App.js</Text> to change this screen and then come back to see your
-						edits.
-					</Section>
-					<Section title="See Your Changes">
-						<ReloadInstructions />
-					</Section>
-					<Section title="Debug">
-						<DebugInstructions />
-					</Section>
-					<Section title="Learn More">Read the docs to discover what to do next:</Section>
-					<LearnMoreLinks />
-				</View>
-			</ScrollView>
-		</SafeAreaView>
+		<NavigationContainer>
+			<StatusBar backgroundColor="#F08080" animated={true} />
+			<Header />
+			<View style={styles.mainContainer}>
+				<TabBar />
+			</View>
+		</NavigationContainer>
 	);
 };
 
 const styles = StyleSheet.create({
-	sectionContainer: {
-		marginTop: 32,
-		paddingHorizontal: 24,
-	},
-	sectionTitle: {
-		fontSize: 24,
-		fontWeight: '600',
-	},
-	sectionFontTest: {
-		fontFamily: 'SFProRounded-Bold',
-	},
-	sectionDescription: {
-		marginTop: 8,
-		fontSize: 18,
-		fontWeight: '400',
-	},
-	highlight: {
-		fontWeight: '700',
+	mainContainer: {
+		width: '100%',
+		height: '100%',
+		backgroundColor: '#000',
 	},
 });
 

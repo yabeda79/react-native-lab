@@ -13,10 +13,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		25136F40D26E2337794D07D1 /* libPods-spiral.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6D3288B0309A93CC64C922 /* libPods-spiral.a */; };
 		546C8B30612A7017A87E410C /* libPods-spiral-spiralTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3820C6EEFDBADB88FB2963E0 /* libPods-spiral-spiralTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		7938422B8F8D4820AD487B71 /* SFProRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB3B5491FD7A429E807CC0F2 /* SFProRounded-Bold.otf */; };
-		9C4A6C099DAD478FB74DFC27 /* SFProRounded-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 939AB246A18E4C4AA99E559D /* SFProRounded-Light.otf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		91D3FC2080B94ECD8AF1BF4F /* SFProRounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 963EC56DBBBA4F85B3616D69 /* SFProRounded-Regular.otf */; };
+		9C4A6C099DAD478FB74DFC27 /* SFProRounded-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 939AB246A18E4C4AA99E559D /* SFProRounded-Light.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,11 +45,11 @@
 		6C80A8B51F125B28E7EB22A8 /* Pods-spiral.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-spiral.release.xcconfig"; path = "Target Support Files/Pods-spiral/Pods-spiral.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = spiral/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		937A47732A1F165A3D3865E3 /* Pods-spiral-spiralTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-spiral-spiralTests.debug.xcconfig"; path = "Target Support Files/Pods-spiral-spiralTests/Pods-spiral-spiralTests.debug.xcconfig"; sourceTree = "<group>"; };
+		939AB246A18E4C4AA99E559D /* SFProRounded-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProRounded-Light.otf"; path = "../assets/fonts/SFProRounded-Light.otf"; sourceTree = "<group>"; };
 		95F00D13CDE0A1BB40CD1679 /* Pods-spiral-spiralTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-spiral-spiralTests.release.xcconfig"; path = "Target Support Files/Pods-spiral-spiralTests/Pods-spiral-spiralTests.release.xcconfig"; sourceTree = "<group>"; };
+		963EC56DBBBA4F85B3616D69 /* SFProRounded-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProRounded-Regular.otf"; path = "../assets/fonts/SFProRounded-Regular.otf"; sourceTree = "<group>"; };
+		EB3B5491FD7A429E807CC0F2 /* SFProRounded-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProRounded-Bold.otf"; path = "../assets/fonts/SFProRounded-Bold.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		EB3B5491FD7A429E807CC0F2 /* SFProRounded-Bold.otf */ = {isa = PBXFileReference; name = "SFProRounded-Bold.otf"; path = "../assets/fonts/SFProRounded-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		939AB246A18E4C4AA99E559D /* SFProRounded-Light.otf */ = {isa = PBXFileReference; name = "SFProRounded-Light.otf"; path = "../assets/fonts/SFProRounded-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		963EC56DBBBA4F85B3616D69 /* SFProRounded-Regular.otf */ = {isa = PBXFileReference; name = "SFProRounded-Regular.otf"; path = "../assets/fonts/SFProRounded-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +124,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6636891418504D3DA6987B04 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EB3B5491FD7A429E807CC0F2 /* SFProRounded-Bold.otf */,
+				939AB246A18E4C4AA99E559D /* SFProRounded-Light.otf */,
+				963EC56DBBBA4F85B3616D69 /* SFProRounded-Regular.otf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,17 +166,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		6636891418504D3DA6987B04 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				EB3B5491FD7A429E807CC0F2 /* SFProRounded-Bold.otf */,
-				939AB246A18E4C4AA99E559D /* SFProRounded-Light.otf */,
-				963EC56DBBBA4F85B3616D69 /* SFProRounded-Regular.otf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
