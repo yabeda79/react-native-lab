@@ -1,150 +1,122 @@
 import React, { FC } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../home';
-import Accounts from '../accounts';
+
+import HomeStack from '../../components/homeStack';
+import AccountStack from '../../components/accountsStack';
 import Giving from '../giving';
 import Payments from '../payments';
 import Cards from '../cards';
+
 import { Image } from 'react-native-elements/dist/image/Image';
 
+import { NavigationContainer } from '@react-navigation/native';
+
+import HeaderLeftBtn from '../../components/headerleftbtn';
+import HeaderRightBtn from '../../components/headerrightbtn';
+import HeaderLogo from '../../components/headerlogo';
+
 import { BlurView } from 'expo-blur';
+
 const Tab = createBottomTabNavigator();
 
-const TabBar: FC = ({ navigation }) => {
-	return (
-		// <Tab.Navigator
-		// 	screenOptions={{
-		// 		tabBarActiveTintColor: '#F08080',
-		// 		tabBarBackground: () => <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />,
-		// 		headerShown: false,
-		// 	}}>
-		// 	<Tab.Screen
-		// 		name="Home"
-		// 		component={Home}
-		// 		options={{
-		// 			tabBarIcon: ({ focused }) => (
-		// 				<View>
-		// 					<Image
-		// 						source={require('../../Assets/Images/home.png')}
-		// 						style={focused ? styles.activeIcon : styles.icon}
-		// 					/>
-		// 				</View>
-		// 			),
-		// 		}}
-		// 	/>
-		// 	<Tab.Screen
-		// 		name="Accounts"
-		// 		component={Accounts}
-		// 		options={{
-		// 			tabBarIcon: ({ focused }) => (
-		// 				<View>
-		// 					<Image
-		// 						source={require('../../Assets/Images/accounts.png')}
-		// 						style={focused ? styles.activeIcon : styles.icon}
-		// 					/>
-		// 				</View>
-		// 			),
-		// 		}}
-		// 	/>
-		// 	<Tab.Screen
-		// 		name="Giving"
-		// 		component={Giving}
-		// 		options={{
-		// 			tabBarIcon: ({ focused }) => (
-		// 				<View>
-		// 					<Image
-		// 						source={require('../../Assets/Images/giving.png')}
-		// 						style={focused ? styles.activeIcon : styles.icon}
-		// 					/>
-		// 				</View>
-		// 			),
-		// 		}}
-		// 	/>
-		// 	<Tab.Screen
-		// 		name="Payments"
-		// 		component={Payments}
-		// 		options={{
-		// 			tabBarIcon: ({ focused }) => (
-		// 				<View>
-		// 					<Image
-		// 						source={require('../../Assets/Images/payment.png')}
-		// 						style={focused ? styles.activeIcon : styles.icon}
-		// 					/>
-		// 				</View>
-		// 			),
-		// 		}}
-		// 	/>
-		// 	<Tab.Screen
-		// 		name="Cards"
-		// 		component={Cards}
-		// 		options={{
-		// 			tabBarIcon: ({ focused }) => (
-		// 				<View>
-		// 					<Image
-		// 						source={require('../../Assets/Images/cards.png')}
-		// 						style={focused ? styles.activeIcon : styles.icon}
-		// 					/>
-		// 				</View>
-		// 			),
-		// 		}}
-		// 	/>
-		// </Tab.Navigator>
+interface ITabBar {
+	signOutChangeHandler: () => void;
+}
 
-		<BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill}>
-			<View style={styles.mainContainer}>
-				<TouchableOpacity>
-					<View style={styles.iconContainer}>
-						<Image
-							source={require('../../Assets/Images/home.png')}
-							// style={focused ? styles.activeIcon : styles.icon}
-							style={styles.icon}
-						/>
-						<Text>Home</Text>
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<View style={styles.iconContainer}>
-						<Image
-							source={require('../../Assets/Images/accounts.png')}
-							// style={focused ? styles.activeIcon : styles.icon}
-							style={styles.icon}
-						/>
-						<Text>Accounts</Text>
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<View style={styles.iconContainer}>
-						<Image
-							source={require('../../Assets/Images/giving.png')}
-							// style={focused ? styles.activeIcon : styles.icon}
-							style={styles.icon}
-						/>
-						<Text>Giving</Text>
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<View style={styles.iconContainer}>
-						<Image
-							source={require('../../Assets/Images/payment.png')}
-							// style={focused ? styles.activeIcon : styles.icon}
-							style={styles.icon}
-						/>
-						<Text>Payment</Text>
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<View style={styles.iconContainer}>
-						<Image
-							source={require('../../Assets/Images/cards.png')}
-							// style={focused ? styles.activeIcon : styles.icon}
-							style={styles.icon}
-						/>
-						<Text>Cards</Text>
-					</View>
-				</TouchableOpacity>
-			</View>
-		</BlurView>
+const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
+	return (
+		<NavigationContainer>
+			<Tab.Navigator
+				screenOptions={{
+					tabBarActiveTintColor: '#F08080',
+					tabBarBackground: () => <BlurView style={styles.blur} tint="light" intensity={90} />,
+					tabBarStyle: {
+						position: 'absolute',
+					},
+
+					headerShown: true,
+					headerLeft: () => <HeaderLeftBtn />,
+					headerRight: () => <HeaderRightBtn signOutChangeHandler={signOutChangeHandler} />,
+					// headerTitle: () => <HeaderLogo />,
+					headerStyle: {
+						backgroundColor: '#F08080',
+					},
+				}}>
+				<Tab.Screen
+					name="Home"
+					component={HomeStack}
+					options={{
+						tabBarIcon: ({ focused }) => (
+							<View>
+								<Image
+									source={require('../../Assets/Images/home.png')}
+									style={focused ? styles.activeIcon : styles.icon}
+								/>
+							</View>
+						),
+						headerTitle: () => <HeaderLogo />,
+					}}
+				/>
+				<Tab.Screen
+					name="Accounts"
+					component={AccountStack}
+					options={{
+						tabBarIcon: ({ focused }) => (
+							<View>
+								<Image
+									source={require('../../Assets/Images/accounts.png')}
+									style={focused ? styles.activeIcon : styles.icon}
+								/>
+							</View>
+						),
+						// insert custom headerlogo component
+					}}
+				/>
+				<Tab.Screen
+					name="Giving"
+					component={Giving}
+					options={{
+						tabBarIcon: ({ focused }) => (
+							<View>
+								<Image
+									source={require('../../Assets/Images/giving.png')}
+									style={focused ? styles.activeIcon : styles.icon}
+								/>
+							</View>
+						),
+					}}
+				/>
+				<Tab.Screen
+					name="Payments"
+					component={Payments}
+					options={{
+						tabBarIcon: ({ focused }) => (
+							<View>
+								<Image
+									source={require('../../Assets/Images/payment.png')}
+									style={focused ? styles.activeIcon : styles.icon}
+								/>
+							</View>
+						),
+					}}
+				/>
+				<Tab.Screen
+					name="Cards"
+					component={Cards}
+					options={{
+						tabBarIcon: ({ focused }) => (
+							<View>
+								<Image
+									source={require('../../Assets/Images/cards.png')}
+									style={focused ? styles.activeIcon : styles.icon}
+								/>
+							</View>
+						),
+					}}
+				/>
+			</Tab.Navigator>
+		</NavigationContainer>
 	);
 };
 export default TabBar;
@@ -176,5 +148,8 @@ const styles = StyleSheet.create({
 		width: 25,
 		height: 25,
 		tintColor: '#F08080',
+	},
+	blur: {
+		height: 1000,
 	},
 });

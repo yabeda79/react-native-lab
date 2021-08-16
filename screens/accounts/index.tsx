@@ -1,13 +1,33 @@
 import React, { FC } from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 
-const Accounts: FC = () => {
+interface IAccounts {
+	navigation: {
+		navigate: (value: string) => void;
+	};
+}
+
+const Accounts: FC<IAccounts> = ({ navigation }) => {
 	return (
-		<SafeAreaView>
-			<View>
+		<ScrollView style={styles.mainContainer}>
+			<View style={styles.mainContainer}>
 				<Text>Accounts</Text>
+				<Button title="Go to Saving" onPress={() => navigation.navigate('Saving')} />
+				<Button title="Go to Checking" onPress={() => navigation.navigate('Checking')} />
 			</View>
-		</SafeAreaView>
+		</ScrollView>
 	);
 };
 export default Accounts;
+
+const styles = StyleSheet.create({
+	mainContainer: {
+		flex: 1,
+		height: 10000,
+	},
+	tabBarContainer: {
+		position: 'absolute',
+		width: '100%',
+		bottom: 20,
+	},
+});

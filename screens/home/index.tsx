@@ -1,17 +1,31 @@
 import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import TabBar from '../tabbar';
+import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 
-const Home: FC = () => {
+// import { RouteProp } from '@react-navigation/native';
+// import { StackNavigationProp } from '@react-navigation/stack';
+
+// type RootStackParamList = {
+// 	Home: undefined;
+// };
+
+// type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
+
+// type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+
+interface IHome {
+	// navigation: HomeScreenNavigationProp;
+	navigation: { navigate: (value: string) => void };
+}
+
+const Home: FC<IHome> = ({ navigation }) => {
 	return (
-		// <SafeAreaView>
-		<View style={styles.mainContainer}>
-			<Text>Home</Text>
-			{/* <View style={styles.tabBarContainer}>
-				<TabBar />
-			</View> */}
-		</View>
-		// </SafeAreaView>
+		<ScrollView style={styles.mainContainer}>
+			<View style={styles.mainContainer}>
+				<Text>Home</Text>
+				<Button title="Go to Saving" onPress={() => navigation.navigate('Saving')} />
+				<Button title="Go to Checking" onPress={() => navigation.navigate('Checking')} />
+			</View>
+		</ScrollView>
 	);
 };
 export default Home;
@@ -19,16 +33,11 @@ export default Home;
 const styles = StyleSheet.create({
 	mainContainer: {
 		flex: 1,
-		// height: '100%',
-		backgroundColor: '#a88b8b',
-		// marginTop: 150,
+		height: 10000,
 	},
 	tabBarContainer: {
 		position: 'absolute',
 		width: '100%',
 		bottom: 20,
-		// justifyContent: 'flex-start',
-		// alignContent: 'flex-start',
-		// alignItems: 'flex-start',
 	},
 });

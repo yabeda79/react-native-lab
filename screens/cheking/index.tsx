@@ -5,7 +5,7 @@ const Cheking: FC = () => {
 	return (
 		<SafeAreaView>
 			<View>
-				<Text>Accounts</Text>
+				<Text>Cheking</Text>
 			</View>
 		</SafeAreaView>
 	);

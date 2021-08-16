@@ -5,7 +5,7 @@ const Saving: FC = () => {
 	return (
 		<SafeAreaView>
 			<View>
-				<Text>Accounts</Text>
+				<Text>Saving</Text>
 			</View>
 		</SafeAreaView>
 	);
