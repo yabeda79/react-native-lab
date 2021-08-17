@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface IHeaderRightBtn {
-	signOutChangeHandler(value: boolean): void;
+	signOutChangeHandler?(value: boolean): void;
 }
 
 const HeaderRightBtn: FC<IHeaderRightBtn> = ({ signOutChangeHandler }) => {

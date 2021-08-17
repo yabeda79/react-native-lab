@@ -3,18 +3,64 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../../screens/home';
 import Saving from '../../screens/saving';
 import Cheking from '../../screens/cheking';
+import HeaderLogo from '../headerlogo';
+import HeaderLeftBtn from '../headerleftbtn';
+import HeaderRightBtn from '../headerrightbtn';
+import HeaderTitle from '../headerTitle';
+import HeaderBackBtn from '../headerBackBtn';
 
-const Stack = createStackNavigator();
+export type RootHomeStackParams = {
+	HomeScreen: undefined;
+	Saving: undefined;
+	Checking: undefined;
+};
+
+const Stack = createStackNavigator<RootHomeStackParams>();
 
 const HomeStack: FC = () => {
 	return (
 		<Stack.Navigator
 			screenOptions={{
-				headerShown: false,
+				headerShown: true,
 			}}>
-			<Stack.Screen name="Home Screen" component={Home} />
-			<Stack.Screen name="Saving" component={Saving} />
-			<Stack.Screen name="Checking" component={Cheking} />
+			<Stack.Screen
+				name="HomeScreen"
+				component={Home}
+				options={{
+					headerLeft: () => <HeaderLeftBtn />,
+					headerRight: () => <HeaderRightBtn />,
+					headerTitle: () => <HeaderLogo />,
+					headerStyle: {
+						backgroundColor: '#F08080',
+					},
+				}}
+			/>
+			<Stack.Screen
+				name="Saving"
+				component={Saving}
+				options={{
+					headerRight: () => <HeaderRightBtn />,
+					headerTitle: () => <HeaderTitle title="Saving" subtitle="Subtitle" />,
+					headerBackTitleVisible: false,
+					headerBackImage: () => <HeaderBackBtn />,
+					headerStyle: {
+						backgroundColor: '#F08080',
+					},
+				}}
+			/>
+			<Stack.Screen
+				name="Checking"
+				component={Cheking}
+				options={{
+					headerRight: () => <HeaderRightBtn />,
+					headerTitle: () => <HeaderTitle title="Checking" subtitle="Subtitle" />,
+					headerBackTitleVisible: false,
+					headerBackImage: () => <HeaderBackBtn />,
+					headerStyle: {
+						backgroundColor: '#F08080',
+					},
+				}}
+			/>
 		</Stack.Navigator>
 	);
 };

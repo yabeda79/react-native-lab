@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { StyleSheet, Text, View, Modal, Button } from 'react-native';
 
 import TabBar from './screens/tabbar';
 
-const App = () => {
+const App: FC = () => {
 	const [isSignOutOpen, setIsSignOutOpen] = useState(false);
 
 	const signOutChangeHandler = () => {

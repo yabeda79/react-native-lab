@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootAccountsStackParams } from '../../components/accountsStack';
+
+type AccountsScreenNavProp = StackNavigationProp<RootAccountsStackParams, 'AccountsScreen'>;
+
 interface IAccounts {
-	navigation: {
-		navigate: (value: string) => void;
-	};
+	navigation: AccountsScreenNavProp;
 }
 
 const Accounts: FC<IAccounts> = ({ navigation }) => {

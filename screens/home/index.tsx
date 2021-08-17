@@ -1,20 +1,13 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 
-// import { RouteProp } from '@react-navigation/native';
-// import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootHomeStackParams } from '../../components/homeStack';
 
-// type RootStackParamList = {
-// 	Home: undefined;
-// };
-
-// type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
-
-// type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type HomeScreenNavProp = StackNavigationProp<RootHomeStackParams, 'HomeScreen'>;
 
 interface IHome {
-	// navigation: HomeScreenNavigationProp;
-	navigation: { navigate: (value: string) => void };
+	navigation: HomeScreenNavProp;
 }
 
 const Home: FC<IHome> = ({ navigation }) => {

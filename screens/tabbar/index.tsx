@@ -14,15 +14,24 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import HeaderLeftBtn from '../../components/headerleftbtn';
 import HeaderRightBtn from '../../components/headerrightbtn';
-import HeaderLogo from '../../components/headerlogo';
+// import HeaderLogo from '../../components/headerlogo';
 
 import { BlurView } from 'expo-blur';
-
-const Tab = createBottomTabNavigator();
+import HeaderTitle from '../../components/headerTitle';
 
 interface ITabBar {
 	signOutChangeHandler: () => void;
 }
+
+type RootTabParamList = {
+	Home: undefined;
+	Accounts: undefined;
+	Giving: undefined;
+	Payments: undefined;
+	Cards: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 	return (
@@ -35,7 +44,7 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 						position: 'absolute',
 					},
 
-					headerShown: true,
+					headerShown: false,
 					headerLeft: () => <HeaderLeftBtn />,
 					headerRight: () => <HeaderRightBtn signOutChangeHandler={signOutChangeHandler} />,
 					// headerTitle: () => <HeaderLogo />,
@@ -55,7 +64,11 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
-						headerTitle: () => <HeaderLogo />,
+						// headerTitle: () => <HeaderLogo />,
+						// headerTitleStyle: {
+						// 	color: '#fff',
+						// },
+						// headerShown: true,
 					}}
 				/>
 				<Tab.Screen
@@ -70,7 +83,10 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
-						// insert custom headerlogo component
+						// headerTitle: () => <HeaderTitle title={'123'} subtitle={'321'} />,
+						// headerTitleStyle: {
+						// 	color: '#fff',
+						// },
 					}}
 				/>
 				<Tab.Screen
@@ -85,6 +101,11 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
+						headerShown: true,
+						headerTitleStyle: {
+							color: '#fff',
+						},
+						headerTitle: () => <HeaderTitle title="Giving" subtitle={null} />,
 					}}
 				/>
 				<Tab.Screen
@@ -99,6 +120,11 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
+						headerShown: true,
+						headerTitleStyle: {
+							color: '#fff',
+						},
+						headerTitle: () => <HeaderTitle title="Payments" subtitle={null} />,
 					}}
 				/>
 				<Tab.Screen
@@ -113,6 +139,11 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
+						headerShown: true,
+						headerTitleStyle: {
+							color: '#fff',
+						},
+						headerTitle: () => <HeaderTitle title="Cards" subtitle={null} />,
 					}}
 				/>
 			</Tab.Navigator>
@@ -123,19 +154,13 @@ export default TabBar;
 
 const styles = StyleSheet.create({
 	mainContainer: {
-		// width: '100%',
 		flexDirection: 'row',
 		height: 50,
-		// position: 'absolute',
-		// backgroundColor: 'purple',
 		zIndex: 3,
 		justifyContent: 'space-between',
 		alignContent: 'center',
 	},
 	iconContainer: {
-		// flex: 1,
-		// backgroundColor: 'black',
-		// width: 20,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
