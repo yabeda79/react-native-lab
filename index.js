@@ -1,10 +1,10 @@
 /**
  * @format
  */
-// import React from 'react';
+import React from 'react';
 import { AppRegistry } from 'react-native';
-// import { Provider } from 'react-redux';
-// import { store } from './redux/store';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import App from './App';
 import { name as appName } from './app.json';
 
@@ -14,4 +14,13 @@ import { name as appName } from './app.json';
 // 	</Provider>
 // ));
 
-AppRegistry.registerComponent(appName, () => App);
+const AppContainer = () => {
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+	);
+};
+
+AppRegistry.registerComponent(appName, () => AppContainer);
+// AppRegistry.registerComponent(appName, () => App);

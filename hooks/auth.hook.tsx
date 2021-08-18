@@ -22,6 +22,8 @@ export const useAuth = (): IUseAuth => {
 	const login = useCallback(async (userProp: IUser) => {
 		dispatch(signIn(userProp));
 
+		console.log(isAuthenticated);
+
 		await AsyncStorage.setItem(ASYNC_STORAGE_AUTH, JSON.stringify(userProp));
 	}, []);
 

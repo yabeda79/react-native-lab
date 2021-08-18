@@ -24,11 +24,20 @@ export const useHttp = () => {
 				throw new Error(data.message || 'Something went wrong (useHttp)');
 			}
 
-			setLoading(false);
+			setTimeout(() => {
+				setLoading(false);
+			}, 10000);
+			// for testing loader only
+
+			// setLoading(false);
 
 			return data;
 		} catch (e) {
-			setLoading(false);
+			setTimeout(() => {
+				setLoading(false);
+			}, 10000);
+			// for texting loader only
+			// setLoading(false);
 			setError(e.message);
 			throw e;
 		}
