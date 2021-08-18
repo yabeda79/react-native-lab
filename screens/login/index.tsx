@@ -5,7 +5,6 @@ import {
 	StyleSheet,
 	TextInput,
 	ScrollView,
-	Dimensions,
 	Alert,
 	TouchableOpacity,
 	ActivityIndicator,
@@ -15,10 +14,9 @@ import { useHttp } from '../../hooks/http.hook';
 import { useAuth } from '../../hooks/auth.hook';
 import { IUser } from '../../redux/initialState';
 
-type loginData = Record<string, string | null>;
+import { vw, vh } from '../../variables';
 
-const vw = Dimensions.get('screen').width / 100; // 390 for iPhone
-const vh = Dimensions.get('screen').height / 100; // 844 for iPhone
+type loginData = Record<string, string | null>;
 
 const LoginScreen: FC = () => {
 	const [loginData, setLoginData] = useState<loginData>();

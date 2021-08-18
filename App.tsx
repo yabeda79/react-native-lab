@@ -15,7 +15,7 @@ const App: FC = () => {
 	const [isSignOutOpen, setIsSignOutOpen] = useState(false);
 
 	// const { request } = useHttp();
-	const { login, logout, isAuthenticated } = useAuth();
+	const { login, isAuthenticated } = useAuth();
 
 	useEffect(() => {
 		async () => {
@@ -25,7 +25,7 @@ const App: FC = () => {
 			if (data && token && userId && typeof token === 'string' && typeof userId === 'string') {
 				login(data as IUser);
 			}
-			logout(); // need to be disabled
+			// logout(); // for texting only
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
