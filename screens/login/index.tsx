@@ -28,7 +28,6 @@ const LoginScreen: FC = () => {
 
 	const loginHandler = async () => {
 		const data = await request('/api/auth/login', 'POST', loginData);
-		console.log(data);
 		login(data as IUser);
 	};
 

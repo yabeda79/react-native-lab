@@ -1,14 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView, Button, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Text } from 'react-native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootHomeStackParams } from '../../components/homeStack';
 
 import AccountHomeReview from '../../components/accountHomeReview';
+import HomePost from '../../components/homePost';
 
 import { getUserSelector } from '../../redux/selectors';
 import { useSelector } from 'react-redux';
+
+import { useHttp } from '../../hooks/http.hook';
+import { vw, vh } from '../../variables';
 
 type HomeScreenNavProp = StackNavigationProp<RootHomeStackParams, 'HomeScreen'>;
 
@@ -16,9 +20,22 @@ interface IHome {
 	navigation: HomeScreenNavProp;
 }
 
+interface IHomePostState {
+	id: number;
+	title: string;
+	image: string;
+	description: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
 const Home: FC<IHome> = ({ navigation }) => {
 	const [helloMessage, setHelloMessage] = useState('');
+	const [homePosts, setHomePosts] = useState<IHomePostState[]>();
+
 	const currentUser = useSelector(getUserSelector);
+
+	const { request } = useHttp();
 
 	const getCurrentMessage = () => {
 		const hour = new Date().getHours().toString();
@@ -44,8 +61,14 @@ const Home: FC<IHome> = ({ navigation }) => {
 		);
 	};
 
+	const getPosts = async () => {
+		const data = await request('/api/posts/getAllPosts');
+		setHomePosts(data);
+	};
+
 	useEffect(() => {
 		sayHello();
+		getPosts();
 	}, []);
 
 	const navigateToHandler = (path: string) => {
@@ -66,9 +89,15 @@ const Home: FC<IHome> = ({ navigation }) => {
 			<Text style={styles.helloMessage}>{helloMessage}</Text>
 			<View style={styles.centerContainer}>
 				<AccountHomeReview navigateToHandler={navigateToHandler} />
-				<Button title="Go to Saving" onPress={() => navigateToHandler('Saving')} />
-				<Button title="Go to Checking" onPress={() => navigateToHandler('Checking')} />
+				{/* <Button title="Go to Saving" onPress={() => navigateToHandler('Saving')} />
+				<Button title="Go to Checking" onPress={() => navigateToHandler('Checking')} /> */}
+				<View style={styles.postsContainer}>
+					{homePosts?.map(({ id, title, image, description, updatedAt }) => (
+						<HomePost key={id} title={title} image={image} description={description} updatedAt={updatedAt} />
+					))}
+				</View>
 			</View>
+			<View style={{ height: 200 }} />
 		</ScrollView>
 	);
 };
@@ -91,5 +120,9 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		width: '100%',
 		bottom: 20,
+	},
+	postsContainer: {
+		// width: 90 * vw,
+		marginTop: 20,
 	},
 });

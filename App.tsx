@@ -17,6 +17,8 @@ const App: FC = () => {
 	// const { request } = useHttp();
 	const { login, isAuthenticated } = useAuth();
 
+	console.log(isAuthenticated);
+
 	useEffect(() => {
 		async () => {
 			const storageData: string | null = await AsyncStorage.getItem(ASYNC_STORAGE_AUTH);
