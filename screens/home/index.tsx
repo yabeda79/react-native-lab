@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { StyleSheet, View, ScrollView, Text, Dimensions } from 'react-native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootHomeStackParams } from '../../components/homeStack';
@@ -13,6 +13,9 @@ import { useSelector } from 'react-redux';
 
 import { useHttp } from '../../hooks/http.hook';
 import { vw, vh } from '../../variables';
+
+// import { OffsetYProvider, IndexProvider, InCenterConsumer } from '@n1ru4l/react-in-center-of-screen';
+import { Viewport } from '@skele/components';
 
 type HomeScreenNavProp = StackNavigationProp<RootHomeStackParams, 'HomeScreen'>;
 
@@ -32,23 +35,27 @@ interface IHomePostState {
 const Home: FC<IHome> = ({ navigation }) => {
 	const [helloMessage, setHelloMessage] = useState('');
 	const [homePosts, setHomePosts] = useState<IHomePostState[]>();
+	const [offsetY, setOffsetY] = useState(0);
+
+	// const topRef = useRef(null);
 
 	const currentUser = useSelector(getUserSelector);
 
 	const { request } = useHttp();
 
 	const getCurrentMessage = () => {
-		const hour = new Date().getHours().toString();
-		if (hour <= '11' && hour > '5') {
+		const hour = parseInt(new Date().getHours().toString(), 10);
+		console.log(hour);
+		if (hour <= 11 && hour > 5) {
 			return 'Good morning';
 		}
-		if (hour <= '18') {
+		if (hour <= 18) {
 			return 'Good afternoon';
 		}
-		if (hour <= '22') {
+		if (hour <= 22) {
 			return 'Good evening';
 		}
-		if (hour <= '5' && hour > '22') {
+		if (hour <= 5 && hour > 22) {
 			return 'Good night';
 		}
 	};
@@ -85,20 +92,65 @@ const Home: FC<IHome> = ({ navigation }) => {
 	};
 
 	return (
-		<ScrollView style={styles.mainContainer}>
-			<Text style={styles.helloMessage}>{helloMessage}</Text>
-			<View style={styles.centerContainer}>
-				<AccountHomeReview navigateToHandler={navigateToHandler} />
-				{/* <Button title="Go to Saving" onPress={() => navigateToHandler('Saving')} />
-				<Button title="Go to Checking" onPress={() => navigateToHandler('Checking')} /> */}
-				<View style={styles.postsContainer}>
-					{homePosts?.map(({ id, title, image, description, updatedAt }) => (
-						<HomePost key={id} title={title} image={image} description={description} updatedAt={updatedAt} />
-					))}
+		<Viewport.Tracker>
+			<ScrollView
+				style={styles.mainContainer}
+				onScroll={(e) => {
+					const { width, height } = Dimensions.get('window');
+
+					// console.log('wh', width, height / 3);
+					console.log(`vw: ${width}; vh/3: ${height / 3}`);
+
+					console.log(e.nativeEvent.contentOffset.y);
+
+					setOffsetY(e.nativeEvent.contentOffset.y);
+				}}>
+				<Text style={styles.helloMessage}>{helloMessage}</Text>
+				<View style={styles.centerContainer}>
+					<AccountHomeReview navigateToHandler={navigateToHandler} />
+
+					{/* <OffsetYProvider
+					columnsPerRow={1}
+					listItemHeight={30 * vh}
+					centerYStart={(100 * vh * 1) / 3}
+					centerYEnd={(100 * vh * 2) / 3}>
+					{() => (
+						<View style={styles.postsContainer}>
+							{homePosts?.map(({ id, title, image, description, updatedAt }) => (
+								<IndexProvider index={id}>
+									{() => (
+										<HomePost
+											key={id}
+											title={title}
+											image={image}
+											description={description}
+											updatedAt={updatedAt}
+											isPaused={isPaused}
+											setIsPaused={setIsPaused}
+										/>
+									)}
+								</IndexProvider>
+							))}
+						</View>
+					)}
+				</OffsetYProvider> */}
+
+					<View style={styles.postsContainer}>
+						{homePosts?.map(({ id, title, image, description, updatedAt }) => (
+							<HomePost
+								key={id}
+								title={title}
+								image={image}
+								description={description}
+								updatedAt={updatedAt}
+								offsetY={offsetY}
+							/>
+						))}
+					</View>
 				</View>
-			</View>
-			<View style={{ height: 200 }} />
-		</ScrollView>
+				<View style={{ height: 200 }} />
+			</ScrollView>
+		</Viewport.Tracker>
 	);
 };
 export default Home;

@@ -1,21 +1,50 @@
-import React, { FC, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { FC, useState, useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, LayoutChangeEvent } from 'react-native';
 import { vh, vw } from '../../variables';
 import { useAuth } from '../../hooks/auth.hook';
 // import Video from 'react-native-video';
 import VideoPlayer from '../../components/videoPlayer';
+
+import { InCenterConsumer } from '@n1ru4l/react-in-center-of-screen';
 
 interface IHomePost {
 	title: string;
 	image: string;
 	description: string;
 	updatedAt: string;
+	// topRef: any;
+	isPaused?: boolean;
+	setIsPaused?: (value: boolean) => void;
 }
 
-const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt }) => {
+interface IMeasure {
+	left: number;
+	top: number;
+	width: number;
+	height: number;
+}
+
+const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt, isPaused, setIsPaused }) => {
 	const { user } = useAuth();
 
-	const [isPlayerActive, setIsPlayerActive] = useState(false);
+	const [isVideoMuted, setIsVideoMuted] = useState(true);
+
+	const [isCentered, setIsCentered] = useState<boolean>();
+
+	// const viewRef = useRef(null);
+
+	// const [measure, setMeasure] = useState<IMeasure | null>(null);
+
+	// console.log(measure);
+
+	// useEffect(() => {
+	// 	if (viewRef.current && topRef.current) {
+	// 		viewRef.current.measureLayout(topRef.current, (left: number, top: number, width: number, height: number) => {
+	// 			setMeasure({ left, top, width, height });
+	// 			console.log('changed');
+	// 		});
+	// 	}
+	// }, [measure]);
 
 	const getUpdatedAgo = () => {
 		const updatedAtYear = parseInt(updatedAt.slice(0, 4), 10);
@@ -50,24 +79,37 @@ const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt }) => {
 		}
 	};
 
-	console.log(image);
+	useEffect(() => {
+		// setInterval(() => {
+		// 	console.log('updated');
+		// }, 1000);
+		console.log(isCentered);
+	}, [isCentered]);
 
 	return (
+		// <InCenterConsumer>
+		// 	{({ isInCenter }: any) => {
+		// 		// setIsCentered(isInCenter);
+		// 		// console.log(isCentered);
+		// 		isInCenter ? setIsCentered(true) : null;
+		// 		return (
 		<View style={styles.mainContainer}>
 			<Image style={styles.avImage} source={require('../../Assets/Images/avatar.png')} />
 			<Text style={styles.title}>Your Giving Impact ({title})</Text>
-			<Text style={styles.updatedAgo}>St Jude {getUpdatedAgo()}</Text>
+			<Text style={styles.updatedAgo}>
+				St Jude {getUpdatedAgo()} {/*+ {isInCenter ? 'in center' : 'not in center'}*/}
+			</Text>
 			<TouchableOpacity
+				style={styles.muteBtn}
 				onPress={() => {
-					setIsPlayerActive(!isPlayerActive);
+					setIsVideoMuted(!isVideoMuted);
 				}}>
-				{/* <Image style={styles.postImage} source={{ uri: image }} /> */}
-				<VideoPlayer isPlayerActive={isPlayerActive} setIsPlayerActive={setIsPlayerActive} />
+				<Image style={styles.muteBtn} source={require('../../Assets/Images/play.png')} />
 			</TouchableOpacity>
+			<VideoPlayer isVideoMuted={isVideoMuted} isPaused={isPaused} setIsPaused={setIsPaused} />
 			<Text style={styles.postText}>
 				{user?.userId}, {description}, thanks for being amazing!
 			</Text>
-
 			<TouchableOpacity style={styles.shareBtn}>
 				<View style={styles.shareBtnContentContainer}>
 					<Image style={styles.shareBtnImage} source={require('../../Assets/Images/shareArrow.png')} />
@@ -75,6 +117,9 @@ const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt }) => {
 				</View>
 			</TouchableOpacity>
 		</View>
+		// 		);
+		// 	}}
+		// </InCenterConsumer>
 	);
 };
 
@@ -102,9 +147,14 @@ const styles = StyleSheet.create({
 		top: 30,
 		color: '#919090',
 	},
-	postImage: {
-		width: '100%',
-		height: 200,
+	muteBtn: {
+		position: 'absolute',
+		top: 35,
+		right: 10,
+		height: 30,
+		width: 30,
+		resizeMode: 'cover',
+		zIndex: 5,
 	},
 	postText: {
 		margin: 10,

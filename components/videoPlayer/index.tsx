@@ -1,6 +1,6 @@
-import React, { useState, useRef, FC } from 'react';
+import React, { useState, useRef, FC, useEffect } from 'react';
 
-import { StyleSheet, Text, View } from 'react-native';
+import { LayoutChangeEvent, StyleSheet, Text, View } from 'react-native';
 
 import Video, { OnProgressData, OnLoadData, OnSeekData } from 'react-native-video';
 
@@ -8,26 +8,31 @@ import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
 import { vh, vw } from '../../variables';
 
 interface IVideo {
-	isPlayerActive: boolean;
-	setIsPlayerActive: (value: boolean) => void;
+	isVideoMuted: boolean;
+	setIsVideoMuted?: (value: boolean) => void;
+	offsetY?: number;
+	setIsPaused?: (value: boolean) => void;
+	key: number;
 }
 
-const VideoPlayer: FC<IVideo> = ({ isPlayerActive, setIsPlayerActive }) => {
-	const videoPlayer = useRef(null);
+const VideoPlayer: FC<IVideo> = ({ isVideoMuted, offsetY, key }) => {
+	const videoPlayer = useRef();
+
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState(0);
 	const [isFullScreen, setIsFullScreen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
-	const [paused, setPaused] = useState(false);
+	const [isPaused, setIsPaused] = useState(true);
 	const [playerState, setPlayerState] = useState<PLAYER_STATES>(PLAYER_STATES.PLAYING);
-	const [screenType, setScreenType] = useState('content');
+	// const [screenType, setScreenType] = useState('content');
+	// const [pos, setPos] = useState(0);
 
 	const onSeek = (seek: OnSeekData) => {
 		videoPlayer.current.seek(seek);
 	};
 
 	const onPaused = (playerStatePar: PLAYER_STATES) => {
-		setPaused(!paused);
+		setIsPaused(!isPaused);
 		setPlayerState(playerStatePar);
 	};
 
@@ -59,31 +64,57 @@ const VideoPlayer: FC<IVideo> = ({ isPlayerActive, setIsPlayerActive }) => {
 
 	// const enterFullScreen = () => {};
 
-	// const onFullScreen = () => {
-	// 	setIsFullScreen(!isFullScreen);
-	// 	if (screenType === 'content') {
-	// 		setScreenType('cover');
-	// 	} else {
-	// 		setScreenType('content');
-	// 	}
-	// };
+	const onFullScreen = () => {
+		setIsFullScreen(!isFullScreen);
+	};
 
 	const onSeeking = (currentTimePar: number) => setCurrentTime(currentTimePar);
 
-	if (!isPlayerActive) {
-		return null;
-	}
+	// if (!isPlayerActive) {
+	// 	return null;
+	// }
 
-	console.log(isFullScreen);
+	const getCurrentPosition = (e: LayoutChangeEvent) => {
+		console.log(e.nativeEvent.layout.y);
+	};
+
+	// const autoplayOnPosition = () => {
+	// 	if (e.nativeEvent.layout.x > 40 * vh) {
+	// 		setIsPaused(false);
+	// 	}
+	// 	if (e.nativeEvent.layout.x > 90 * vh) {
+	// 		setIsPaused(true);
+	// 	}
+	// 	console.log(isPaused);
+	// };
+
+	const isOnAutoPlay = () => {
+		if (offsetY > 25 * vh * key) {
+			setIsPaused(false);
+		} else {
+			setIsPaused(true);
+		}
+		// if (offsetY < 35 * vh * key * 2) {
+		// 	setIsPaused(true);
+		// }
+	};
+
+	useEffect(() => {
+		isOnAutoPlay();
+	}, [offsetY]);
 
 	return (
 		<View style={styles.mainContainer}>
 			<Video
+				onLayout={(e) => {
+					getCurrentPosition(e);
+				}}
+				muted={isVideoMuted}
 				onEnd={onEnd}
 				onLoad={(data) => onLoad(data)}
 				onLoadStart={onLoadStart}
 				onProgress={(data: OnProgressData) => onProgress(data)}
-				paused={paused}
+				paused={isPaused}
 				ref={videoPlayer}
 				// resizeMode={screenType}
 				resizeMode="contain"
@@ -100,9 +131,9 @@ const VideoPlayer: FC<IVideo> = ({ isPlayerActive, setIsPlayerActive }) => {
 				duration={duration}
 				isLoading={isLoading}
 				mainColor="#333"
-				// onFullScreen={() => {
-				// 	onFullScreen();
-				// }}
+				onFullScreen={() => {
+					onFullScreen();
+				}}
 				onPaused={onPaused}
 				onReplay={onReplay}
 				onSeek={() => onSeek}
