@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useEffect, useState, useRef } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView, Text, Dimensions } from 'react-native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -12,7 +12,6 @@ import { getUserSelector } from '../../redux/selectors';
 import { useSelector } from 'react-redux';
 
 import { useHttp } from '../../hooks/http.hook';
-import { vw, vh } from '../../variables';
 
 // import { OffsetYProvider, IndexProvider, InCenterConsumer } from '@n1ru4l/react-in-center-of-screen';
 import { Viewport } from '@skele/components';
@@ -95,10 +94,9 @@ const Home: FC<IHome> = ({ navigation }) => {
 		<Viewport.Tracker>
 			<ScrollView
 				style={styles.mainContainer}
+				scrollEventThrottle={16}
 				onScroll={(e) => {
 					const { width, height } = Dimensions.get('window');
-
-					// console.log('wh', width, height / 3);
 					console.log(`vw: ${width}; vh/3: ${height / 3}`);
 
 					console.log(e.nativeEvent.contentOffset.y);
@@ -108,37 +106,11 @@ const Home: FC<IHome> = ({ navigation }) => {
 				<Text style={styles.helloMessage}>{helloMessage}</Text>
 				<View style={styles.centerContainer}>
 					<AccountHomeReview navigateToHandler={navigateToHandler} />
-
-					{/* <OffsetYProvider
-					columnsPerRow={1}
-					listItemHeight={30 * vh}
-					centerYStart={(100 * vh * 1) / 3}
-					centerYEnd={(100 * vh * 2) / 3}>
-					{() => (
-						<View style={styles.postsContainer}>
-							{homePosts?.map(({ id, title, image, description, updatedAt }) => (
-								<IndexProvider index={id}>
-									{() => (
-										<HomePost
-											key={id}
-											title={title}
-											image={image}
-											description={description}
-											updatedAt={updatedAt}
-											isPaused={isPaused}
-											setIsPaused={setIsPaused}
-										/>
-									)}
-								</IndexProvider>
-							))}
-						</View>
-					)}
-				</OffsetYProvider> */}
-
 					<View style={styles.postsContainer}>
 						{homePosts?.map(({ id, title, image, description, updatedAt }) => (
 							<HomePost
 								key={id}
+								id={id}
 								title={title}
 								image={image}
 								description={description}
@@ -174,7 +146,6 @@ const styles = StyleSheet.create({
 		bottom: 20,
 	},
 	postsContainer: {
-		// width: 90 * vw,
 		marginTop: 20,
 	},
 });

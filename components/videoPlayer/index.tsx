@@ -1,22 +1,24 @@
 import React, { useState, useRef, FC, useEffect } from 'react';
 
-import { LayoutChangeEvent, StyleSheet, Text, View } from 'react-native';
+import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 
 import Video, { OnProgressData, OnLoadData, OnSeekData } from 'react-native-video';
 
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
-import { vh, vw } from '../../variables';
+import { vh } from '../../variables';
 
 interface IVideo {
 	isVideoMuted: boolean;
 	setIsVideoMuted?: (value: boolean) => void;
 	offsetY?: number;
-	setIsPaused?: (value: boolean) => void;
-	key: number;
+	// setIsPaused?: (value: boolean) => void;
+	id: number;
 }
 
-const VideoPlayer: FC<IVideo> = ({ isVideoMuted, offsetY, key }) => {
+const VideoPlayer: FC<IVideo> = ({ isVideoMuted, offsetY, id }) => {
 	const videoPlayer = useRef();
+
+	console.log('id', id);
 
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState(0);
@@ -24,8 +26,6 @@ const VideoPlayer: FC<IVideo> = ({ isVideoMuted, offsetY, key }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isPaused, setIsPaused] = useState(true);
 	const [playerState, setPlayerState] = useState<PLAYER_STATES>(PLAYER_STATES.PLAYING);
-	// const [screenType, setScreenType] = useState('content');
-	// const [pos, setPos] = useState(0);
 
 	const onSeek = (seek: OnSeekData) => {
 		videoPlayer.current.seek(seek);
@@ -56,47 +56,24 @@ const VideoPlayer: FC<IVideo> = ({ isVideoMuted, offsetY, key }) => {
 
 	const onEnd = () => setPlayerState(PLAYER_STATES.ENDED);
 
-	// const onError = () => alert('Oh! ', error);
-
-	// const exitFullScreen = () => {
-	// 	alert('Exit full screen');
-	// };
-
-	// const enterFullScreen = () => {};
-
 	const onFullScreen = () => {
 		setIsFullScreen(!isFullScreen);
 	};
 
 	const onSeeking = (currentTimePar: number) => setCurrentTime(currentTimePar);
 
-	// if (!isPlayerActive) {
-	// 	return null;
-	// }
-
 	const getCurrentPosition = (e: LayoutChangeEvent) => {
 		console.log(e.nativeEvent.layout.y);
 	};
 
-	// const autoplayOnPosition = () => {
-	// 	if (e.nativeEvent.layout.x > 40 * vh) {
-	// 		setIsPaused(false);
-	// 	}
-	// 	if (e.nativeEvent.layout.x > 90 * vh) {
-	// 		setIsPaused(true);
-	// 	}
-	// 	console.log(isPaused);
-	// };
-
 	const isOnAutoPlay = () => {
-		if (offsetY > 25 * vh * key) {
-			setIsPaused(false);
-		} else {
-			setIsPaused(true);
+		if (offsetY) {
+			if (offsetY > 16 * vh * id) {
+				setIsPaused(false);
+			} else {
+				setIsPaused(true);
+			}
 		}
-		// if (offsetY < 35 * vh * key * 2) {
-		// 	setIsPaused(true);
-		// }
 	};
 
 	useEffect(() => {
@@ -143,8 +120,6 @@ const VideoPlayer: FC<IVideo> = ({ isVideoMuted, offsetY, key }) => {
 				// toolbar={renderToolbar()}
 			>
 				<View />
-				{/* <Text style={styles.toolbar}> Toolbar</Text> */}
-				{/* </View> */}
 			</MediaControls>
 		</View>
 	);

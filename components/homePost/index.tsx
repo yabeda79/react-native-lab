@@ -1,11 +1,9 @@
-import React, { FC, useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, LayoutChangeEvent } from 'react-native';
+import React, { FC, useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { vh, vw } from '../../variables';
 import { useAuth } from '../../hooks/auth.hook';
 // import Video from 'react-native-video';
 import VideoPlayer from '../../components/videoPlayer';
-
-import { InCenterConsumer } from '@n1ru4l/react-in-center-of-screen';
 
 interface IHomePost {
 	title: string;
@@ -15,6 +13,8 @@ interface IHomePost {
 	// topRef: any;
 	isPaused?: boolean;
 	setIsPaused?: (value: boolean) => void;
+	offsetY: number;
+	id: number;
 }
 
 interface IMeasure {
@@ -24,43 +24,16 @@ interface IMeasure {
 	height: number;
 }
 
-const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt, isPaused, setIsPaused }) => {
+const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt, offsetY, id }) => {
 	const { user } = useAuth();
 
 	const [isVideoMuted, setIsVideoMuted] = useState(true);
-
-	const [isCentered, setIsCentered] = useState<boolean>();
-
-	// const viewRef = useRef(null);
-
-	// const [measure, setMeasure] = useState<IMeasure | null>(null);
-
-	// console.log(measure);
-
-	// useEffect(() => {
-	// 	if (viewRef.current && topRef.current) {
-	// 		viewRef.current.measureLayout(topRef.current, (left: number, top: number, width: number, height: number) => {
-	// 			setMeasure({ left, top, width, height });
-	// 			console.log('changed');
-	// 		});
-	// 	}
-	// }, [measure]);
 
 	const getUpdatedAgo = () => {
 		const updatedAtYear = parseInt(updatedAt.slice(0, 4), 10);
 		const updatedAtMonth = parseInt(updatedAt.slice(5, 7), 10);
 		const updatedAtDay = parseInt(updatedAt.slice(8, 10), 10);
 		const updatedAtHour = parseInt(updatedAt.slice(11, 13), 10);
-
-		// console.log(`${updatedAtYear} - ${new Date().getFullYear().toString()}`);
-		// console.log(`${updatedAtMonth} - ${new Date().getMonth().toString()}`);
-		// console.log(`${updatedAtDay} - ${new Date().getDate().toString()}`); // mistake
-		// console.log(`${updatedAtHour} - ${new Date().getHours().toString()}`);
-
-		// console.log(`${parseInt(new Date().getFullYear().toString(), 10) - updatedAtYear} years ago`);
-		// console.log(`${parseInt(new Date().getMonth().toString(), 10) - updatedAtMonth + 1} months ago`);
-		// console.log(`${parseInt(new Date().getDate().toString(), 10) - updatedAtDay} days ago`);
-		// console.log(`${parseInt(new Date().getHours().toString(), 10) - updatedAtHour} hours ago`);
 
 		if (parseInt(new Date().getFullYear().toString(), 10) - updatedAtYear > 0) {
 			return `${parseInt(new Date().getFullYear().toString(), 10) - updatedAtYear} years ago`;
@@ -79,20 +52,7 @@ const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt, isPause
 		}
 	};
 
-	useEffect(() => {
-		// setInterval(() => {
-		// 	console.log('updated');
-		// }, 1000);
-		console.log(isCentered);
-	}, [isCentered]);
-
 	return (
-		// <InCenterConsumer>
-		// 	{({ isInCenter }: any) => {
-		// 		// setIsCentered(isInCenter);
-		// 		// console.log(isCentered);
-		// 		isInCenter ? setIsCentered(true) : null;
-		// 		return (
 		<View style={styles.mainContainer}>
 			<Image style={styles.avImage} source={require('../../Assets/Images/avatar.png')} />
 			<Text style={styles.title}>Your Giving Impact ({title})</Text>
@@ -106,7 +66,7 @@ const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt, isPause
 				}}>
 				<Image style={styles.muteBtn} source={require('../../Assets/Images/play.png')} />
 			</TouchableOpacity>
-			<VideoPlayer isVideoMuted={isVideoMuted} isPaused={isPaused} setIsPaused={setIsPaused} />
+			<VideoPlayer id={id} isVideoMuted={isVideoMuted} offsetY={offsetY} />
 			<Text style={styles.postText}>
 				{user?.userId}, {description}, thanks for being amazing!
 			</Text>
