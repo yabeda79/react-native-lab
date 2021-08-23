@@ -8,11 +8,13 @@ import HeaderLeftBtn from '../headerleftbtn';
 import HeaderRightBtn from '../headerrightbtn';
 import HeaderTitle from '../headerTitle';
 import HeaderBackBtn from '../headerBackBtn';
+import Profile from '../../screens/profile';
 
 export type RootHomeStackParams = {
 	HomeScreen: undefined;
 	Saving: undefined;
 	Checking: undefined;
+	Profile: undefined;
 };
 
 const Stack = createStackNavigator<RootHomeStackParams>();
@@ -26,40 +28,53 @@ const HomeStack: FC = () => {
 			<Stack.Screen
 				name="HomeScreen"
 				component={Home}
-				options={{
+				options={({ navigation }) => ({
 					headerLeft: () => <HeaderLeftBtn />,
-					headerRight: () => <HeaderRightBtn />,
+					headerRight: () => <HeaderRightBtn navigation={navigation} />,
 					headerTitle: () => <HeaderLogo />,
 					headerStyle: {
 						backgroundColor: '#F08080',
 					},
-				}}
+				})}
 			/>
 			<Stack.Screen
 				name="Saving"
 				component={Saving}
-				options={{
-					headerRight: () => <HeaderRightBtn />,
+				options={({ navigation }) => ({
+					headerRight: () => <HeaderRightBtn navigation={navigation} />,
 					headerTitle: () => <HeaderTitle title="Saving" subtitle="Subtitle" />,
 					headerBackTitleVisible: false,
 					headerBackImage: () => <HeaderBackBtn />,
 					headerStyle: {
 						backgroundColor: '#F08080',
 					},
-				}}
+				})}
 			/>
 			<Stack.Screen
 				name="Checking"
 				component={Cheking}
-				options={{
-					headerRight: () => <HeaderRightBtn />,
+				options={({ navigation }) => ({
+					headerRight: () => <HeaderRightBtn navigation={navigation} />,
 					headerTitle: () => <HeaderTitle title="Checking" subtitle="Subtitle" />,
 					headerBackTitleVisible: false,
 					headerBackImage: () => <HeaderBackBtn />,
 					headerStyle: {
 						backgroundColor: '#F08080',
 					},
-				}}
+				})}
+			/>
+			<Stack.Screen
+				name="Profile"
+				component={Profile}
+				options={({ navigation }) => ({
+					headerRight: () => <HeaderRightBtn navigation={navigation} />,
+					headerTitle: () => <HeaderTitle title="Profile" subtitle="Subtitle" />,
+					headerBackTitleVisible: false,
+					headerBackImage: () => <HeaderBackBtn />,
+					headerStyle: {
+						backgroundColor: '#F08080',
+					},
+				})}
 			/>
 		</Stack.Navigator>
 	);

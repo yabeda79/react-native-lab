@@ -1,13 +1,20 @@
 import React, { FC } from 'react';
 import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootHomeStackParams } from '../../components/homeStack';
+
+type ProfileScreenNavProp = StackNavigationProp<RootHomeStackParams, 'Profile'>;
 
 interface IHeaderRightBtn {
-	signOutChangeHandler?(value: boolean): void;
+	navigation: ProfileScreenNavProp;
 }
 
-const HeaderRightBtn: FC<IHeaderRightBtn> = ({ signOutChangeHandler }) => {
+const HeaderRightBtn: FC<IHeaderRightBtn> = ({ navigation }) => {
 	return (
-		<TouchableOpacity onPress={signOutChangeHandler}>
+		<TouchableOpacity
+			onPress={() => {
+				navigation.navigate('Profile');
+			}}>
 			<Image style={styles.menuBtn} source={require('../../Assets/Images/avatar.png')} />
 		</TouchableOpacity>
 	);

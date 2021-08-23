@@ -32,24 +32,13 @@ const App: FC = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const signOutChangeHandler = () => {
-		setIsSignOutOpen(!isSignOutOpen);
-	};
-
 	if (!isAuthenticated) {
 		return <LoginScreen />;
 	}
 
 	return (
 		<View style={styles.mainContainer}>
-			<TabBar signOutChangeHandler={signOutChangeHandler} />
-
-			<Modal animationType="fade" visible={isSignOutOpen} onRequestClose={signOutChangeHandler} transparent={true}>
-				<View style={styles.signOutModalContainer}>
-					<Text style={styles.signOutModalText}>Sign Out</Text>
-					<Button title="Close modal" onPress={signOutChangeHandler} />
-				</View>
-			</Modal>
+			<TabBar />
 		</View>
 	);
 };

@@ -4,24 +4,25 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeStack from '../../components/homeStack';
 import AccountStack from '../../components/accountsStack';
-import Giving from '../giving';
-import Payments from '../payments';
-import Cards from '../cards';
+// import Giving from '../giving';
+// import Payments from '../payments';
+// import Cards from '../cards';
 
 import { Image } from 'react-native-elements/dist/image/Image';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import HeaderLeftBtn from '../../components/headerleftbtn';
-import HeaderRightBtn from '../../components/headerrightbtn';
+// import HeaderLeftBtn from '../../components/headerleftbtn';
+// import HeaderRightBtn from '../../components/headerrightbtn';
 // import HeaderLogo from '../../components/headerlogo';
 
 import { BlurView } from 'expo-blur';
-import HeaderTitle from '../../components/headerTitle';
+// import HeaderTitle from '../../components/headerTitle';
+import GivingStack from '../../components/givingStack';
+import PaymentsStack from '../../components/PaymentsStack';
+import CardsStack from '../../components/cardsStack';
 
-interface ITabBar {
-	signOutChangeHandler: () => void;
-}
+interface ITabBar {}
 
 type RootTabParamList = {
 	Home: undefined;
@@ -33,7 +34,7 @@ type RootTabParamList = {
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
+const TabBar: FC<ITabBar> = () => {
 	return (
 		<NavigationContainer>
 			<Tab.Navigator
@@ -45,12 +46,12 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 					},
 
 					headerShown: false,
-					headerLeft: () => <HeaderLeftBtn />,
-					headerRight: () => <HeaderRightBtn signOutChangeHandler={signOutChangeHandler} />,
+					// headerLeft: () => <HeaderLeftBtn />,
+					// headerRight: () => <HeaderRightBtn />,
 					// headerTitle: () => <HeaderLogo />,
-					headerStyle: {
-						backgroundColor: '#F08080',
-					},
+					// headerStyle: {
+					// 	backgroundColor: '#F08080',
+					// },
 				}}>
 				<Tab.Screen
 					name="Home"
@@ -91,7 +92,7 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 				/>
 				<Tab.Screen
 					name="Giving"
-					component={Giving}
+					component={GivingStack}
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<View>
@@ -101,16 +102,16 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
-						headerShown: true,
-						headerTitleStyle: {
-							color: '#fff',
-						},
-						headerTitle: () => <HeaderTitle title="Giving" subtitle={null} />,
+						// headerShown: true,
+						// headerTitleStyle: {
+						// 	color: '#fff',
+						// },
+						// headerTitle: () => <HeaderTitle title="Giving" subtitle={null} />,
 					}}
 				/>
 				<Tab.Screen
 					name="Payments"
-					component={Payments}
+					component={PaymentsStack}
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<View>
@@ -120,16 +121,16 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
-						headerShown: true,
-						headerTitleStyle: {
-							color: '#fff',
-						},
-						headerTitle: () => <HeaderTitle title="Payments" subtitle={null} />,
+						// headerShown: true,
+						// headerTitleStyle: {
+						// 	color: '#fff',
+						// },
+						// headerTitle: () => <HeaderTitle title="Payments" subtitle={null} />,
 					}}
 				/>
 				<Tab.Screen
 					name="Cards"
-					component={Cards}
+					component={CardsStack}
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<View>
@@ -139,11 +140,14 @@ const TabBar: FC<ITabBar> = ({ signOutChangeHandler }) => {
 								/>
 							</View>
 						),
-						headerShown: true,
-						headerTitleStyle: {
-							color: '#fff',
-						},
-						headerTitle: () => <HeaderTitle title="Cards" subtitle={null} />,
+						// headerShown: true,
+						// headerTitleStyle: {
+						// 	color: '#fff',
+						// },
+						// tabBarShowLabel: false,
+						// tabBarIconStyle: { display: 'none' },
+						// tabBarLabelStyle: { display: 'none' },
+						// headerTitle: () => <HeaderTitle title="Cards" subtitle={null} />,
 					}}
 				/>
 			</Tab.Navigator>
