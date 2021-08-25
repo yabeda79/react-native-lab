@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { vw, vh } from '../../variables';
+import { vw, vh, chekingCash, savingsCash, goodnessCash, summary } from '../../variables';
 
 interface IAccountHomeReview {
 	navigateToHandler: (value: string) => void;
@@ -11,13 +11,16 @@ const AccountHomeReview: FC<IAccountHomeReview> = ({ navigateToHandler }) => {
 		<View style={styles.mainContainer}>
 			<Text style={styles.mainTitle}>Accounts Overview</Text>
 			<Text style={styles.cashText}>
-				$7,000.<Text style={styles.lowerText}>00</Text>
+				${summary.split('.')[0]}.
+				<Text style={styles.lowerText}>
+					{summary.split('.')[1].length === 1 ? summary.split('.')[1] + '0' : summary.split('.')[1]}
+				</Text>
 			</Text>
 			<TouchableOpacity style={styles.liContainer} onPress={() => navigateToHandler('Checking')}>
 				<Text style={styles.mainLiText}>Checking</Text>
 				<Text style={styles.lightLiText}>Main account (...1488)</Text>
 				<Text style={styles.liCash}>
-					$1,500.<Text style={styles.liLowerCash}>26</Text>
+					${chekingCash.split('.')[0]}.<Text style={styles.liLowerCash}>{chekingCash.split('.')[1]}</Text>
 				</Text>
 				<View style={styles.liNavBtn}>
 					<Image style={styles.liNavBtnImg} source={require('../../Assets/Images/back.png')} />
@@ -27,7 +30,7 @@ const AccountHomeReview: FC<IAccountHomeReview> = ({ navigateToHandler }) => {
 				<Text style={styles.mainLiText}>Savings</Text>
 				<Text style={styles.lightLiText}>Buy a house (...1488)</Text>
 				<Text style={styles.liCash}>
-					$1,500.<Text style={styles.liLowerCash}>26</Text>
+					${savingsCash.split('.')[0]}.<Text style={styles.liLowerCash}>{savingsCash.split('.')[1]}</Text>
 				</Text>
 				<View style={styles.liNavBtn}>
 					<Image style={styles.liNavBtnImg} source={require('../../Assets/Images/back.png')} />
@@ -38,7 +41,7 @@ const AccountHomeReview: FC<IAccountHomeReview> = ({ navigateToHandler }) => {
 				<Image style={styles.goodnessLogo} source={require('../../Assets/Images/heart.png')} />
 				<Text style={styles.lightLiText}>Cash Rewards</Text>
 				<Text style={styles.liCash}>
-					$1,500.<Text style={styles.liLowerCash}>26</Text>
+					${goodnessCash.split('.')[0]}.<Text style={styles.liLowerCash}>{goodnessCash.split('.')[1]}</Text>
 				</Text>
 				<View style={styles.liNavBtn}>
 					<Image style={styles.liNavBtnImg} source={require('../../Assets/Images/back.png')} />

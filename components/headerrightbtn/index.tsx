@@ -27,7 +27,7 @@ const HeaderRightBtn: FC<IHeaderRightBtn> = ({ navigation }) => {
 			<Image
 				style={styles.menuBtn}
 				// source={user?.profileImg ? require(image) : require('../../Assets/Images/avatar.png')}
-				source={require('../../Assets/Images/avatar.png')}
+				source={require('../../Assets/Images/oval.png')}
 			/>
 		</TouchableOpacity>
 	);
