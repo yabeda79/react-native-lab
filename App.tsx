@@ -1,5 +1,5 @@
-import React, { useState, FC, useEffect } from 'react';
-import { StyleSheet, Text, View, Modal, Button } from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 import TabBar from './screens/tabbar';
 import LoginScreen from './screens/login';
@@ -12,7 +12,7 @@ import { ASYNC_STORAGE_AUTH } from './AsyncStorage';
 import { IUser } from './redux/initialState';
 
 const App: FC = () => {
-	const [isSignOutOpen, setIsSignOutOpen] = useState(false);
+	// const [isSignOutOpen, setIsSignOutOpen] = useState(false);
 
 	// const { request } = useHttp();
 	const { login, isAuthenticated } = useAuth();
@@ -23,8 +23,8 @@ const App: FC = () => {
 		async () => {
 			const storageData: string | null = await AsyncStorage.getItem(ASYNC_STORAGE_AUTH);
 			const data = JSON.parse(storageData || '{}');
-			const { token, userId } = data;
-			if (data && token && userId && typeof token === 'string' && typeof userId === 'string') {
+			const { token, username } = data;
+			if (data && token && username && typeof token === 'string' && typeof username === 'string') {
 				login(data as IUser);
 			}
 			// logout(); // for texting only

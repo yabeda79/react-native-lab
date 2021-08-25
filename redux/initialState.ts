@@ -8,5 +8,11 @@ export const initialState: IState = {
 
 export interface IUser {
 	token: string;
-	userId: string;
+	username: string;
+	email: string;
+	description: string;
+	isAdmin: boolean;
+	profileImg: string;
+	dateOfBirth: string;
+	// dateOfBirth: Date;
 }

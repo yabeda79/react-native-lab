@@ -61,7 +61,7 @@ const Home: FC<IHome> = ({ navigation }) => {
 
 	const sayHello = () => {
 		setHelloMessage(
-			`${getCurrentMessage()}, ${currentUser?.userId} | ${new Date().getDate().toString()}-${new Date()
+			`${getCurrentMessage()}, ${currentUser?.username} | ${new Date().getDate().toString()}-${new Date()
 				.getMonth()
 				.toString()}-${new Date().getFullYear().toString()}`,
 		);

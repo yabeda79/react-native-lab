@@ -68,7 +68,7 @@ const HomePost: FC<IHomePost> = ({ title, image, description, updatedAt, offsetY
 			</TouchableOpacity>
 			<VideoPlayer id={id} isVideoMuted={isVideoMuted} offsetY={offsetY} />
 			<Text style={styles.postText}>
-				{user?.userId}, {description}, thanks for being amazing!
+				{user?.username}, {description}, thanks for being amazing!
 			</Text>
 			<TouchableOpacity style={styles.shareBtn}>
 				<View style={styles.shareBtnContentContainer}>

@@ -346,6 +346,8 @@ PODS:
     - React-perflogger (= 0.64.1)
   - RNCAsyncStorage (1.15.6):
     - React-Core
+  - RNDateTimePicker (3.5.2):
+    - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNScreens (3.5.0):
@@ -420,6 +422,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
@@ -514,6 +517,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNDateTimePicker:
+    :path: "../node_modules/@react-native-community/datetimepicker"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
@@ -576,6 +581,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: ff951a0c241bfaefc4940a3f1f1a229e7cb32fa6
   ReactCommon: bedc99ed4dae329c4fcf128d0c31b9115e5365ca
   RNCAsyncStorage: bb9649cb43f0040f82948084a0044e45292c5be3
+  RNDateTimePicker: c9911be59b1f8670b9f244b85af3a7c295e175ed
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNScreens: 01ab149b5dd5c27f5ff26741b1d2bdf2cee1af35
   UMAppLoader: db2dae4bc3085e21f56d6d9cf7783d08c5999af4

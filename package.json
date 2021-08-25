@@ -12,6 +12,7 @@
   "dependencies": {
     "@n1ru4l/react-in-center-of-screen": "^1.0.0-alpha.4",
     "@react-native-async-storage/async-storage": "^1.15.6",
+    "@react-native-community/datetimepicker": "^3.5.2",
     "@react-navigation/bottom-tabs": "^6.0.4",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.6",
