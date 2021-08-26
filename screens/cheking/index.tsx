@@ -42,9 +42,9 @@ const Cheking: FC = () => {
 						<Text style={styles.filterBtnText}>Filter by</Text>
 					</TouchableOpacity>
 				</View>
-				{chekingsList?.map(({ title, amount, card, description, isSpecial }) => {
+				{chekingsList?.map(({ id, title, amount, card, description, isSpecial }) => {
 					return (
-						<View style={styles.linkContainer}>
+						<View key={id} style={styles.linkContainer}>
 							<TouchableOpacity style={styles.liContainer}>
 								<Text style={isSpecial ? styles.specialMainLiText : styles.mainLiText}>{title}</Text>
 								<Text style={isSpecial ? styles.specialLightLiText : styles.lightLiText}>

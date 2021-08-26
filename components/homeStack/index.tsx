@@ -42,7 +42,7 @@ const HomeStack: FC = () => {
 				component={Saving}
 				options={({ navigation }) => ({
 					headerRight: () => <HeaderRightBtn navigation={navigation} />,
-					headerTitle: () => <HeaderTitle title="Saving" subtitle="Subtitle" />,
+					headerTitle: () => <HeaderTitle title="Saving" subtitle="Buy a house | ...4044" />,
 					headerBackTitleVisible: false,
 					headerBackImage: () => <HeaderBackBtn />,
 					headerStyle: {
