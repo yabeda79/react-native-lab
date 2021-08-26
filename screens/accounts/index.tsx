@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, Text, View, ScrollView, Button, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootAccountsStackParams } from '../../components/accountsStack';

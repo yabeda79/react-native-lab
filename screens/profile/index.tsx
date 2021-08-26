@@ -110,7 +110,7 @@ const Profile: FC = () => {
 					}}>
 					<Image
 						style={styles.avatarImage}
-						source={isAuthenticated ? profileImage : require('../../Assets/Images/avatar3x.png')}
+						source={isAuthenticated ? profileImage.source : require('../../Assets/Images/avatar3x.png')}
 					/>
 				</TouchableOpacity>
 			</View>

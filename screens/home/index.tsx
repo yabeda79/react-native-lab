@@ -36,8 +36,6 @@ const Home: FC<IHome> = ({ navigation }) => {
 	const [homePosts, setHomePosts] = useState<IHomePostState[]>();
 	const [offsetY, setOffsetY] = useState(0);
 
-	// const topRef = useRef(null);
-
 	const currentUser = useSelector(getUserSelector);
 
 	const { request } = useHttp();
