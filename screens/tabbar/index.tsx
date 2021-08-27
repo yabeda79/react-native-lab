@@ -21,8 +21,11 @@ import { BlurView } from 'expo-blur';
 import GivingStack from '../../components/givingStack';
 import PaymentsStack from '../../components/PaymentsStack';
 import CardsStack from '../../components/cardsStack';
+import { useEffect } from 'react';
 
-interface ITabBar {}
+interface ITabBar {
+	setIsLoaded: (value: boolean) => void;
+}
 
 type RootTabParamList = {
 	Home: undefined;
@@ -34,7 +37,14 @@ type RootTabParamList = {
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-const TabBar: FC<ITabBar> = () => {
+const TabBar: FC<ITabBar> = ({ setIsLoaded }) => {
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoaded(true);
+		}, 1000);
+		// setIsLoaded(true);
+	}, []);
+
 	return (
 		<NavigationContainer>
 			<Tab.Navigator

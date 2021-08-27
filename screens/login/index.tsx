@@ -15,10 +15,15 @@ import { useAuth } from '../../hooks/auth.hook';
 import { IUser } from '../../redux/initialState';
 
 import { vw, vh } from '../../variables';
+import { useEffect } from 'react';
 
 type loginData = Record<string, string | null>;
 
-const LoginScreen: FC = () => {
+interface ILoginScreen {
+	setIsLoaded: (value: boolean) => void;
+}
+
+const LoginScreen: FC<ILoginScreen> = ({ setIsLoaded }) => {
 	const [loginData, setLoginData] = useState<loginData>();
 	const [emailActive, setEmailActive] = useState(false);
 	const [passwordActive, setPasswordActive] = useState(false);
@@ -34,6 +39,13 @@ const LoginScreen: FC = () => {
 	const inputHandler = (text: string, name: string) => {
 		setLoginData({ ...loginData, [name]: text });
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoaded(true);
+		}, 1000);
+		// setIsLoaded(true);
+	}, []);
 
 	console.log((320 * 100) / 844);
 

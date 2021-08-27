@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import TabBar from './screens/tabbar';
@@ -12,11 +12,11 @@ import { ASYNC_STORAGE_AUTH } from './AsyncStorage';
 import { IUser } from './redux/initialState';
 
 import SplashScreen from 'react-native-splash-screen';
-import { useSelector } from 'react-redux';
-import { getUserSelector } from './redux/selectors';
+
+import AnimatedSplash from 'react-native-animated-splash-screen';
 
 const App: FC = () => {
-	// const [isSignOutOpen, setIsSignOutOpen] = useState(false);
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	// const { request } = useHttp();
 	const { login, isAuthenticated } = useAuth();
@@ -42,13 +42,31 @@ const App: FC = () => {
 	}, []);
 
 	if (!isAuthenticated) {
-		return <LoginScreen />;
+		return (
+			<AnimatedSplash
+				translucent={true}
+				isLoaded={isLoaded}
+				logoImage={require('./Assets/Images/logo_splash_screen.png')}
+				backgroundColor={'#F08080'}
+				logoHeight={150}
+				logoWidth={150}>
+				<LoginScreen setIsLoaded={setIsLoaded} />
+			</AnimatedSplash>
+		);
 	}
 
 	return (
-		<View style={styles.mainContainer}>
-			<TabBar />
-		</View>
+		<AnimatedSplash
+			translucent={true}
+			isLoaded={isLoaded}
+			logoImage={require('./Assets/Images/logo_splash_screen.png')}
+			backgroundColor={'#262626'}
+			logoHeight={150}
+			logoWidth={150}>
+			<View style={styles.mainContainer}>
+				<TabBar setIsLoaded={setIsLoaded} />
+			</View>
+		</AnimatedSplash>
 	);
 };
 
