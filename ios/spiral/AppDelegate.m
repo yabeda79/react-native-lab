@@ -11,6 +11,7 @@
 #endif
 
 #import <React/RCTRootView.h>
+#import "RNSplashScreen.h"
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -62,6 +63,7 @@ self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc] initWithModuleRegi
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
+  [RNSplashScreen show];
   return YES;
 }
 - (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge

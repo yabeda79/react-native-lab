@@ -71,9 +71,13 @@ const Home: FC<IHome> = ({ navigation }) => {
 	};
 
 	useEffect(() => {
-		sayHello();
+		// sayHello();
 		getPosts();
 	}, []);
+
+	useEffect(() => {
+		sayHello();
+	}, [currentUser]);
 
 	const navigateToHandler = (path: string) => {
 		switch (path) {

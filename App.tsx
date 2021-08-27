@@ -11,6 +11,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ASYNC_STORAGE_AUTH } from './AsyncStorage';
 import { IUser } from './redux/initialState';
 
+import SplashScreen from 'react-native-splash-screen';
+import { useSelector } from 'react-redux';
+import { getUserSelector } from './redux/selectors';
+
 const App: FC = () => {
 	// const [isSignOutOpen, setIsSignOutOpen] = useState(false);
 
@@ -27,9 +31,14 @@ const App: FC = () => {
 			if (data && token && username && typeof token === 'string' && typeof username === 'string') {
 				login(data as IUser);
 			}
-			// logout(); // for texting only
+			// logout(); // for testing only
 		};
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		SplashScreen.hide();
 	}, []);
 
 	if (!isAuthenticated) {
