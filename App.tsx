@@ -60,7 +60,7 @@ const App: FC = () => {
 			translucent={true}
 			isLoaded={isLoaded}
 			logoImage={require('./Assets/Images/logo_splash_screen.png')}
-			backgroundColor={'#262626'}
+			backgroundColor={'#F08080'}
 			logoHeight={150}
 			logoWidth={150}>
 			<View style={styles.mainContainer}>
