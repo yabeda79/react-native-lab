@@ -1,7 +1,7 @@
 name: Distribute to firebase
 
 on:
-  workflow_dispatch:
+  [push]
 
 jobs:
   distribute:
