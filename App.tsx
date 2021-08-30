@@ -1,3 +1,5 @@
+// spiral-3e8fc
+
 import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -20,6 +22,7 @@ const App: FC = () => {
 
 	// const { request } = useHttp();
 	const { login, isAuthenticated } = useAuth();
+	// const isAuthenticated = true;
 
 	console.log(isAuthenticated);
 
