@@ -1,8 +1,7 @@
 name: Distribute to firebase
 
 on:
-  push:
-    branches: [ test ]
+  [ push ]
 
 jobs:
   distribute:
