@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - test
+      - yabeda79-patch-2
 
 jobs:
   distribute:
