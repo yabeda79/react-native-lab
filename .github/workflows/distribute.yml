@@ -2,7 +2,8 @@ name: Distribute
 
 on:
   push:
-    branches: [ test ]
+    branches:
+      - test
 
 jobs:
   distribute:
