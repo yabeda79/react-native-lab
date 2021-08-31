@@ -16,11 +16,11 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.6'
-      
+
       - name: Install bundle
         run: |
           gem update
           BUNDLE_GEMFILE="./android/Gemfile" bundle install
-          
+
       - name: Distribute app
-        run: BUNDLE_GEMFILE="./android/Gemfile" bundle exec fastlane distribute
+        run: BUNDLE_GEMFILE="./android/Gemfile" bundle exec fastlane firebase_distribution
