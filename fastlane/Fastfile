@@ -91,7 +91,7 @@ platform :android do
   lane :firebase_distribution do
 
     # build_android_app(task: "assembleRelease", project_dir: "./android")
-    gradle(task: "clean assembleRelease", project_dir: "./android")
+    gradle(task: "clean assembleRelease", project_dir: "/home/runner/work/react-native-lab/android/")
     # gradle(
     #   task: 'assemble',
     #   build_type: 'debug',
