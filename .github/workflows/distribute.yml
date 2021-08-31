@@ -1,24 +1,24 @@
-name: Distribute to firebase
+name: Distribute
 
 on:
-  [ push ]
+  push:
+    branches: [ test ]
 
 jobs:
   distribute:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: '2.7'
-      - name: install firebase tool
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        run: |
-          yarn global add firebase-tools
-          echo "::add-path::$(yarn global bin)"
+          ruby-version: '2.6'
       
-      - name: setup fastline
-        run: bundle install
-      - name: distribute to firebase
-        run: bundle exec fastlane android distribute
+      - name: Install bundle
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          
+      - name: Distribute app
+        run: bundle exec fastlane distribute
