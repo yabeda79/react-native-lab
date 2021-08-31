@@ -1,0 +1,26 @@
+name: Distribute
+
+on:
+  push:
+    branches:
+      - test
+      - yabeda79-patch-2
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+
+      - name: Install bundle
+        run: |
+          gem update
+          BUNDLE_GEMFILE="./Gemfile" bundle install
+
+      - name: Distribute app
+        run: BUNDLE_GEMFILE="./Gemfile" bundle exec fastlane firebase_distribution
