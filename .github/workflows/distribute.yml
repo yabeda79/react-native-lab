@@ -18,9 +18,7 @@ jobs:
           ruby-version: '2.6'
       
       - name: Install bundle
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+        run: BUNDLE_GEMFILE="react-native-lab/android/Gemfile" bundle install
           
       - name: Distribute app
         run: bundle exec fastlane distribute
