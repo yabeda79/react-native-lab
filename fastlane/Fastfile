@@ -92,6 +92,11 @@ platform :android do
 
     # build_android_app(task: "assembleRelease", project_dir: "./android")
     gradle(task: "clean assembleRelease", project_dir: "./android")
+    # gradle(
+    #   task: 'assemble',
+    #   build_type: 'debug',
+    #   project_dir: "./android"
+    # )
 
     diawi(
           token: "cFZWG3lUUzqKJgYXMT2RrxT7tlk0Ti9bgjTIblGlUp"
