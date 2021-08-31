@@ -20,7 +20,7 @@ jobs:
       - name: Install bundle
         run: |
           gem update
-          BUNDLE_GEMFILE="./android/Gemfile" bundle install
+          BUNDLE_GEMFILE="./Gemfile" bundle install
 
       - name: Distribute app
-        run: BUNDLE_GEMFILE="./android/Gemfile" bundle exec fastlane firebase_distribution
+        run: BUNDLE_GEMFILE="./Gemfile" bundle exec fastlane firebase_distribution
