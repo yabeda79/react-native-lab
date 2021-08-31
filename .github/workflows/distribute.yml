@@ -19,6 +19,7 @@ jobs:
       
       - name: Install bundle
         run: |
+          gem update
           BUNDLE_GEMFILE="./android/Gemfile" bundle install
           
       - name: Distribute app
